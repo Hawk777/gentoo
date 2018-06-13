@@ -19,7 +19,7 @@ else
 	MY_P=${PN}-opensource-src-${MY_PV}
 	[[ ${MY_PV} == ${PV} ]] && MY_REL=official || MY_REL=development
 	SRC_URI="https://download.qt.io/${MY_REL}_releases/${PN/-}/${PV%.*}/${MY_PV}/${MY_P}.tar.xz"
-	KEYWORDS="~amd64 ~arm ~x86"
+	KEYWORDS="amd64 ~arm ~x86"
 	S=${WORKDIR}/${MY_P}
 fi
 
@@ -53,7 +53,7 @@ CDEPEND="
 	>=dev-qt/qtxml-${QT_PV}
 	clangcodemodel? ( >=sys-devel/clang-3.9:= )
 	designer? ( >=dev-qt/designer-${QT_PV} )
-	qbs? ( >=dev-util/qbs-1.10.1 )
+	qbs? ( =dev-util/qbs-1.10.1* )
 	systemd? ( sys-apps/systemd:= )
 	webengine? ( >=dev-qt/qtwebengine-${QT_PV}[widgets] )
 "

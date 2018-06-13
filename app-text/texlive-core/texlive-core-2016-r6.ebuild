@@ -12,7 +12,7 @@ inherit eutils flag-o-matic toolchain-funcs libtool texlive-common
 MY_PV=${PN%-core}-${TL_SOURCE_VERSION}-source
 
 DESCRIPTION="A complete TeX distribution"
-HOMEPAGE="http://tug.org/texlive/"
+HOMEPAGE="https://tug.org/texlive/"
 SLOT="0"
 LICENSE="GPL-2 LPPL-1.3c TeX"
 
@@ -80,10 +80,8 @@ IUSE="cjk X doc source tk +luajittex xetex"
 TEXMF_PATH=/usr/share/texmf-dist
 
 MODULAR_X_DEPEND="X? (
+				x11-libs/libX11
 				x11-libs/libXmu
-				x11-libs/libXp
-				x11-libs/libXpm
-				x11-libs/libXaw
 	)"
 
 COMMON_DEPEND="${MODULAR_X_DEPEND}

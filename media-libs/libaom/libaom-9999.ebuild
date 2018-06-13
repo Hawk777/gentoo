@@ -8,12 +8,13 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://aomedia.googlesource.com/aom"
 elif [[ ${PV} == *pre* ]]; then
-	SRC_URI="mirror://gentoo/${P}.tar.bz2"
+	SRC_URI="mirror://gentoo/${P}.tar.xz"
 	KEYWORDS="~amd64"
+	S="${WORKDIR}/${PN}"
 fi
 
 DESCRIPTION="Alliance for Open Media AV1 Codec SDK"
-HOMEPAGE="http://aomedia.org"
+HOMEPAGE="https://aomedia.org"
 
 LICENSE="BSD-2"
 SLOT="0/0"
@@ -34,6 +35,8 @@ REQUIRED_USE="
 	cpu_flags_x86_sse2? ( cpu_flags_x86_mmx )
 	cpu_flags_x86_ssse3? ( cpu_flags_x86_sse2 )
 "
+
+PATCHES=( "${FILESDIR}/libdirpc.patch" "${FILESDIR}/pthread_lib.patch" )
 
 src_prepare() {
 	sed -e 's/lib"/lib${LIB_SUFFIX}"/' -i CMakeLists.txt || die
@@ -63,6 +66,7 @@ multilib_src_configure() {
 		-DBUILD_SHARED_LIBS=ON
 	)
 	cmake-utils_src_configure
+	rm aom.pc # ensure it is rebuilt with proper libdir
 }
 
 multilib_src_install() {

@@ -1,5 +1,18 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
+
+# Thomas Deutschmann <whissi@gentoo.org> (06 Jun 2018)
+# Needs sys-apps/fakechroot which isn't keyworded
+app-arch/rpm test
+
+# Michał Górny <mgorny@gentoo.org> (15 Apr 2018)
+# Unkeyworded deps.
+net-misc/curl curl_ssl_axtls
+
+# Michał Górny <mgorny@gentoo.org> (15 Apr 2018)
+# Unkeyworded dep masks moved from default/linux/ia64 tree.
+mail-client/mutt notmuch
+mail-mta/exim redis
 
 # Sergei Trofimovich <slyfox@gentoo.org> (18 Mar 2018)
 # Many unkeyworded rails deps, bug #650642
@@ -180,8 +193,8 @@ net-analyzer/wireshark doc-pdf
 net-misc/spice-gtk smartcard webdav
 
 # Gilles Dartiguelongue <eva@gentoo.org> (09 Jun 2015)
-# dev-lang/luajit and dev-lua/lgi and lack ia64 keyword, bug #551540
-dev-libs/libpeas lua jit
+# dev-lang/luajit lacks ia64 keyword, bug #551540
+dev-libs/libpeas lua
 
 # Mike Frysinger <vapier@gentoo.org> (16 Mar 2015)
 # Needs sci-physics/bullet & media-libs/libsdl2 tested #499974
@@ -213,10 +226,6 @@ net-misc/modemmanager mbim
 # Mike Frysinger <vapier@gentoo.org> (15 Mar 2014)
 # Various deps not ported to ia64.
 dev-python/ipython nbconvert notebook
-
-# Mike Frysinger <vapier@gentoo.org> (15 Mar 2014)
-# dev-python/greenlet is not ported to ia64.
-dev-python/pyzmq green test
 
 # Pacho Ramos <pacho@gentoo.org> (15 Mar 2014)
 # Missing keywords, bug #504672

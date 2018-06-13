@@ -58,8 +58,8 @@ REQUIRED_USE="
 "
 
 COMMON_DEPEND="
-	!libav? ( >=media-video/ffmpeg-9999:0=[encode?,threads,vaapi?,vdpau?] )
-	libav? ( >=media-video/libav-9999:0=[encode?,threads,vaapi?,vdpau?] )
+	!libav? ( >=media-video/ffmpeg-4.0:0=[encode?,threads,vaapi?,vdpau?] )
+	libav? ( ~media-video/libav-9999:0=[encode?,threads,vaapi?,vdpau?] )
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
@@ -151,6 +151,10 @@ src_configure() {
 		append-cflags -I"${SYSROOT%/}${EPREFIX}/opt/vc/include"
 		append-ldflags -L"${SYSROOT%/}${EPREFIX}/opt/vc/lib"
 	fi
+
+	# Prevent access violations from zsh completion generation.
+	# See Gentoo bug 656086.
+	use zsh-completion && addpredict /dev/dri
 
 	local mywafargs=(
 		--confdir="${EPREFIX}/etc/${PN}"

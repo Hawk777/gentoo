@@ -11,7 +11,7 @@ SRC_URI="mirror://sourceforge/recordmydesktop/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
+KEYWORDS="amd64 ~ppc ~ppc64 x86"
 IUSE="alsa jack"
 
 RDEPEND="sys-libs/zlib
@@ -26,14 +26,12 @@ RDEPEND="sys-libs/zlib
 	alsa? ( media-libs/alsa-lib )
 	jack? ( virtual/jack )"
 DEPEND="${RDEPEND}
-	x11-proto/xextproto"
+	x11-base/xorg-proto"
 
 src_prepare() {
-	if has_version ">=x11-proto/xextproto-7.1.1"; then
-		sed -i \
-			-e 's:shmstr.h:shmproto.h:g' \
-			src/rmd_{getzpixmap.c,update_image.c} || die
-	fi
+	sed -i \
+		-e 's:shmstr.h:shmproto.h:g' \
+		src/rmd_{getzpixmap.c,update_image.c} || die
 
 	# fix weird Framerates with new libtheora
 	epatch "${FILESDIR}/${PV}-fix_new_theora.patch"

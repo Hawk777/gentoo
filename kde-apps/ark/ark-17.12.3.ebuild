@@ -11,7 +11,7 @@ inherit kde5
 DESCRIPTION="KDE Archiving tool"
 HOMEPAGE="https://www.kde.org/applications/utilities/ark
 https://utils.kde.org/projects/ark/"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="bzip2 lzma zip"
 
 RDEPEND="
@@ -60,16 +60,16 @@ src_configure() {
 pkg_postinst() {
 	kde5_pkg_postinst
 
-	# not a typo, app-arch/unar is a real package
-	if ! has_version app-arch/unar ; then
-		elog "For handling rar archives, install app-arch/unar"
+	if ! has_version app-arch/unar && ! has_version app-arch/unrar; then
+		elog "For extracting rar archives, install app-arch/unar (free) or app-arch/unrar (non-free)."
 	fi
 
-	if ! has_version app-arch/p7zip ; then
-		elog "For handling 7-Zip archives, install app-arch/p7zip"
-	fi
+	has_version app-arch/rar || \
+		elog "For creating rar archives, installing app-arch/rar is required."
 
-	if ! has_version app-arch/lrzip ; then
-		elog "For handling lrz archives, install app-arch/lrzip"
-	fi
+	has_version app-arch/p7zip || \
+		elog "For handling 7-Zip archives, install app-arch/p7zip."
+
+	has_version app-arch/lrzip || \
+		elog "For handling lrz archives, install app-arch/lrzip."
 }

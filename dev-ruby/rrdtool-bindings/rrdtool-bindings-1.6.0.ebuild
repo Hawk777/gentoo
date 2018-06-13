@@ -3,7 +3,7 @@
 
 EAPI="5"
 
-USE_RUBY="ruby21 ruby22 ruby23 ruby24"
+USE_RUBY="ruby23 ruby24 ruby25"
 
 RUBY_FAKEGEM_TASK_DOC=""
 
@@ -13,8 +13,8 @@ MY_P=${P/-bindings}
 MY_P=${MY_P/_/-}
 
 DESCRIPTION="Ruby bindings for rrdtool"
-HOMEPAGE="http://oss.oetiker.ch/rrdtool/"
-SRC_URI="http://oss.oetiker.ch/rrdtool/pub/${MY_P}.tar.gz"
+HOMEPAGE="https://oss.oetiker.ch/rrdtool/"
+SRC_URI="${HOMEPAGE}pub/${MY_P}.tar.gz"
 RUBY_S="$MY_P"/bindings/ruby
 
 LICENSE="GPL-2"

@@ -14,7 +14,7 @@ SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
 IUSE="gnome gssapi gtk hardened ipv6 selinux xinetd zeroconf"
 
 RESTRICT="test"
@@ -74,7 +74,7 @@ src_prepare() {
 		-e "s:@libdir@:/usr/$(get_libdir):" \
 		"${FILESDIR}/3.2/distcc-config" > "${T}/distcc-config" || die
 
-	hprefixify -e "s,/lib/,/$(get_libdir)/," update-distcc-symlinks.py src/{serve,daemon}.c
+	hprefixify update-distcc-symlinks.py src/{serve,daemon}.c
 }
 
 src_configure() {

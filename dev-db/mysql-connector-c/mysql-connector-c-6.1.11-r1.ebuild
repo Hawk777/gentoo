@@ -18,7 +18,7 @@ LICENSE="GPL-2"
 
 SRC_URI="https://dev.mysql.com/get/Downloads/Connector-C/${P}-src.tar.gz"
 S="${WORKDIR}/${P}-src"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc x86"
 
 SUBSLOT="18"
 SLOT="0/${SUBSLOT}"
@@ -45,6 +45,7 @@ DOCS=( README )
 PATCHES=(
 	"${FILESDIR}/mysql_com.patch"
 	"${FILESDIR}/20028_all_mysql-5.6-gcc7.patch"
+	"${FILESDIR}/6.1.11-openssl-1.1.patch"
 )
 
 src_prepare() {
@@ -57,7 +58,7 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	mycmakeargs+=(
+	local mycmakeargs=(
 		-DINSTALL_LAYOUT=RPM
 		-DINSTALL_LIBDIR=$(get_libdir)
 		-DWITH_DEFAULT_COMPILER_OPTIONS=OFF

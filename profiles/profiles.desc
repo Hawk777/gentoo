@@ -54,6 +54,7 @@ amd64           default/linux/amd64/17.0/x32                            dev
 amd64           default/linux/amd64/17.1                           exp
 amd64           default/linux/amd64/17.1/selinux                   exp
 amd64           default/linux/amd64/17.1/hardened                  exp
+amd64           default/linux/amd64/17.1/hardened/selinux          exp
 amd64           default/linux/amd64/17.1/desktop                   exp
 amd64           default/linux/amd64/17.1/desktop/gnome             exp
 amd64           default/linux/amd64/17.1/desktop/gnome/systemd     exp
@@ -104,13 +105,13 @@ arm64           default/linux/arm64/17.0                        dev
 arm64           default/linux/arm64/17.0/desktop                exp
 arm64           default/linux/arm64/17.0/desktop/systemd        dev
 arm64           default/linux/arm64/17.0/developer              exp
-arm64           default/linux/arm64/17.0/systemd                exp
+arm64           default/linux/arm64/17.0/systemd                dev
 
 # HPPA Profiles
 # @MAINTAINER: hppa@gentoo.org
-hppa            default/linux/hppa/13.0                         stable
-hppa            default/linux/hppa/13.0/desktop                 dev
-hppa            default/linux/hppa/13.0/developer               dev
+hppa            default/linux/hppa/13.0                         exp
+hppa            default/linux/hppa/13.0/desktop                 exp
+hppa            default/linux/hppa/13.0/developer               exp
 hppa            default/linux/hppa/17.0                         exp
 hppa            default/linux/hppa/17.0/desktop                 exp
 hppa            default/linux/hppa/17.0/developer               exp
@@ -239,6 +240,7 @@ x86		default/linux/x86/13.0/systemd			stable
 x86             default/linux/x86/17.0                          stable
 x86             default/linux/x86/17.0/selinux                  stable
 x86             default/linux/x86/17.0/hardened                 stable
+x86             default/linux/x86/17.0/hardened/selinux         stable
 x86             default/linux/x86/17.0/desktop                  stable
 x86             default/linux/x86/17.0/desktop/gnome            stable
 x86             default/linux/x86/17.0/desktop/gnome/systemd    stable

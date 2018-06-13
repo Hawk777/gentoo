@@ -23,12 +23,11 @@ Scapy has optional support for the following packages:
 	dev-python/gnuplot-py
 	dev-python/ipython
 	dev-python/pyx
-	dev-python/visual
 	media-gfx/graphviz
 	net-analyzer/tcpreplay
 	virtual/imagemagick-tools
 
-	See also ${EPREFIX}/usr/share/doc/${PF}/installation.rst
+	See also ""${EPREFIX}/usr/share/doc/${PF}/installation.rst""
 "
 
 src_prepare() {

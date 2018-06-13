@@ -5,11 +5,11 @@ EAPI=6
 inherit versionator
 
 DESCRIPTION="Java-based build tool similar to 'make' that uses XML configuration files"
-HOMEPAGE="http://ant.apache.org/"
+HOMEPAGE="https://ant.apache.org/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="amd64 ppc64 x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
 IUSE="X +antlr +bcel +bsf +commonslogging +commonsnet jai +javamail +jdepend jmf
 	+jsch +log4j +oro +regexp +resolver testutil"

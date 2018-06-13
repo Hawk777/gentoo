@@ -1,25 +1,28 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit eutils multilib-minimal
+inherit multilib-minimal
 
 DESCRIPTION="Free version of the SSL/TLS protocol forked from OpenSSL"
-HOMEPAGE="http://www.libressl.org/"
-SRC_URI="http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/${P}.tar.gz"
+HOMEPAGE="https://www.libressl.org/"
+SRC_URI="https://ftp.openbsd.org/pub/OpenBSD/LibreSSL/${P}.tar.gz"
 
 LICENSE="ISC openssl"
 # Reflects ABI of libcrypto.so and libssl.so.  Since these can differ,
 # we'll try to use the max of either.  However, if either change between
 # versions, we have to change the subslot to trigger rebuild of consumers.
 SLOT="0/44"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86"
-IUSE="+asm static-libs"
+KEYWORDS="~alpha amd64 arm ~arm64 ~hppa ~ia64 ~mips ppc ppc64 s390 sparc x86"
+IUSE="+asm static-libs test"
+REQUIRED_USE="test? ( static-libs )"
 
 RDEPEND="!dev-libs/openssl:0"
 DEPEND="${RDEPEND}"
 PDEPEND="app-misc/ca-certificates"
+
+PATCHES=( "${FILESDIR}/libressl-2.6.4-hppa-asm.patch" )
 
 src_prepare() {
 	touch crypto/Makefile.in
@@ -33,7 +36,7 @@ src_prepare() {
 		-e '/^[ \t]*USER_CFLAGS=/s#-O2"#"#' \
 		configure || die "fixing CFLAGS failed"
 
-	eapply_user
+	default
 }
 
 multilib_src_configure() {
@@ -48,5 +51,5 @@ multilib_src_test() {
 
 multilib_src_install_all() {
 	einstalldocs
-	prune_libtool_files
+	find "${D}" -name '*.la' -exec rm -f {} + || die
 }

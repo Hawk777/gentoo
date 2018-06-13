@@ -11,10 +11,14 @@ SRC_URI="mirror://sourceforge/${PN}/${P}-src.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
-IUSE="debug nls openssl static-libs"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x64-solaris ~x86-solaris"
+IUSE="debug nls libressl ssl static-libs"
 
-RDEPEND="openssl? ( dev-libs/openssl:0=[${MULTILIB_USEDEP}] )"
+RDEPEND="
+	ssl? (
+		!libressl? ( dev-libs/openssl:0=[${MULTILIB_USEDEP}] )
+		libressl? ( dev-libs/libressl:0=[${MULTILIB_USEDEP}] )
+)"
 
 DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
@@ -34,6 +38,7 @@ src_prepare() {
 multilib_src_configure() {
 	set -- \
 		./configure \
+		--target="${CHOST}" \
 		--cc="$(tc-getCC)" \
 		--ar="$(tc-getAR)" \
 		--extra-cflags="${CFLAGS}" \
@@ -46,7 +51,7 @@ multilib_src_configure() {
 		--enable-lib-shared \
 		$(use_enable debug) \
 		$(use_enable nls gettext) \
-		$(use_enable openssl) \
+		$(use_enable ssl openssl) \
 		$(use_enable static-libs lib-static)
 
 	echo "${@}"
@@ -59,8 +64,9 @@ multilib_src_configure() {
 multilib_src_install() {
 	# -j1 needed due to race condition.
 	emake DESTDIR="${D}" -j1 \
-		  install{,-lib-so-link,-pkg-config} \
-		  $(use nls && echo install-gmo)
+		  install{,-pkg-config} \
+		  $(use nls && echo install-gmo) \
+		  $(use kernel_Winnt || echo install-lib-so-link)
 
 	emake DESTDIR="${D}" -j1 \
 		  -C lib${PN} install-headers

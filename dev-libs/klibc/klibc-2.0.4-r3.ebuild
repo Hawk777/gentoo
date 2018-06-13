@@ -21,7 +21,7 @@ K_TARBALL_SUFFIX="xz"
 inherit eutils toolchain-funcs flag-o-matic
 
 DESCRIPTION="A minimal libc subset for use with initramfs"
-HOMEPAGE="http://www.zytor.com/mailman/listinfo/klibc/ https://www.kernel.org/pub/linux/libs/klibc/"
+HOMEPAGE="https://www.zytor.com/mailman/listinfo/klibc/ https://www.kernel.org/pub/linux/libs/klibc/"
 KV_MAJOR="4" KV_MINOR="x" KV_SUB="14"
 PKV_EXTRA=""
 if [[ ${PKV_EXTRA} ]]; then
@@ -50,7 +50,7 @@ SRC_URI="
 	${KERNEL_URI}"
 
 LICENSE="|| ( GPL-2 LGPL-2 )"
-KEYWORDS="~alpha ~amd64 ~arm ~ia64 -mips ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS="~alpha amd64 ~arm ia64 -mips ~ppc ~ppc64 ~sparc x86"
 SLOT="0"
 IUSE="debug test custom-cflags"
 
@@ -178,7 +178,8 @@ src_compile() {
 	append-ldflags -z noexecstack
 	append-flags -nostdlib
 
-	emake \
+	# Parallel build intermittantly fails when doing `LIST usr/klibc/syscalls/klib.list'
+	emake -j1 \
 		EXTRA_KLIBCAFLAGS="-Wa,--noexecstack" \
 		EXTRA_KLIBCLDFLAGS="-z noexecstack" \
 		HOSTLDFLAGS="-z noexecstack" \

@@ -6,7 +6,7 @@ EAPI=6
 inherit gnome2-utils prefix qmake-utils xdg-utils
 
 DESCRIPTION="Free cross-platform LaTeX editor (fork from texmakerX)"
-HOMEPAGE="http://texstudio.sourceforge.net/"
+HOMEPAGE="https://www.texstudio.org https://github.com/texstudio-org/texstudio"
 #SRC_URI="mirror://sourceforge/${PN}/${PN}/TeXstudio%20${PV}/${P}.tar.gz"
 # ^^ temporary disabled
 # * upstream could not solve gentoo bug #627062 for 2 months.
@@ -16,7 +16,7 @@ SRC_URI="https://dev.gentoo.org/~jstein/dist/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~x86-fbsd"
+KEYWORDS="amd64 ~ppc ~ppc64 x86 ~x86-fbsd"
 IUSE="video"
 
 COMMON_DEPEND="

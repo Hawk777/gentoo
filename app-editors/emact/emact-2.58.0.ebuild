@@ -9,12 +9,13 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2+ BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 IUSE="X"
 
-DEPEND="sys-libs/ncurses:0=
+RDEPEND="sys-libs/ncurses:0=
 	X? ( x11-libs/libX11 )"
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	X? ( x11-base/xorg-proto )"
 
 src_configure() {
 	econf $(use_with X x)

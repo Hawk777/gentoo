@@ -11,7 +11,7 @@ SRC_URI="https://github.com/jordansissel/xdotool/releases/download/v${PV}/${P}.t
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~ppc ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
 IUSE="examples"
 
 RDEPEND="
@@ -22,8 +22,7 @@ RDEPEND="
 "
 DEPEND="
 	${RDEPEND}
-	x11-proto/xineramaproto
-	x11-proto/xproto
+	x11-base/xorg-proto
 "
 
 # The test wants to manualy start Xvfb, wont use VirtualX and it tries

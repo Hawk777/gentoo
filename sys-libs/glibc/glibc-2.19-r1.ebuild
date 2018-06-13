@@ -1,6 +1,8 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+EAPI=0
+
 inherit toolchain-glibc
 
 DESCRIPTION="GNU libc6 (also called glibc2) C library"
@@ -16,8 +18,7 @@ RELEASE_VER=""
 case ${PV} in
 9999*)
 	EGIT_REPO_URIS="git://sourceware.org/git/glibc.git"
-	EGIT_SOURCEDIRS="${S}"
-	inherit git-2
+	inherit git-r3
 	;;
 *)
 	RELEASE_VER=${PV}

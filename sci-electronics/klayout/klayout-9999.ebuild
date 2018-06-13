@@ -4,7 +4,7 @@
 EAPI=6
 
 RUBY_OPTIONAL=no
-USE_RUBY="ruby22"
+USE_RUBY="ruby23"
 # note: define maximally ONE implementation here
 
 PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
@@ -16,12 +16,12 @@ if [[ ${PV} = 9999* ]]; then
 	inherit git-r3
 	EGIT_CHECKOUT_DIR=${WORKDIR}/all/${P}
 else
-	SRC_URI="http://www.klayout.org/downloads/source/${P}.tar.gz"
+	SRC_URI="https://www.klayout.org/downloads/source/${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
 fi
 
 DESCRIPTION="Viewer and editor for GDS and OASIS integrated circuit layouts"
-HOMEPAGE="http://www.klayout.de/"
+HOMEPAGE="https://www.klayout.de/"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE=""

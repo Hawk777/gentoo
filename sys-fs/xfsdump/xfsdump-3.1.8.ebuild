@@ -6,12 +6,12 @@ EAPI=6
 inherit multilib flag-o-matic toolchain-funcs
 
 DESCRIPTION="xfs dump/restore utilities"
-HOMEPAGE="http://oss.sgi.com/projects/xfs"
+HOMEPAGE="https://xfs.wiki.kernel.org/"
 SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/${PN}/${P}.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~hppa ia64 ~mips ppc ppc64 -sparc ~x86"
+KEYWORDS="alpha amd64 hppa ia64 ~mips ppc ppc64 -sparc x86"
 IUSE="ncurses nls"
 
 RDEPEND="

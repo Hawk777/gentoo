@@ -5,7 +5,7 @@ EAPI=6
 inherit eutils flag-o-matic autotools
 
 DESCRIPTION="3D tank combat simulator game"
-HOMEPAGE="http://www.bzflag.org/"
+HOMEPAGE="https://www.bzflag.org/"
 SRC_URI="https://download.bzflag.org/bzflag/source/${PV}/${P}.tar.bz2"
 
 LICENSE="LGPL-2.1"
@@ -13,7 +13,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="dedicated upnp"
 
-DEPEND="
+RDEPEND="
 	net-dns/c-ares
 	>=net-misc/curl-7.15.0
 	sys-libs/ncurses:0
@@ -22,8 +22,12 @@ DEPEND="
 		media-libs/libsdl2[joystick,sound,video]
 		virtual/glu
 		virtual/opengl )
-	upnp? ( net-libs/miniupnpc )"
-RDEPEND=${DEPEND}
+	upnp? ( net-libs/miniupnpc )
+"
+DEPEND="
+	${RDEPEND}
+	virtual/pkgconfig
+"
 PATCHES=(
 	"${FILESDIR}"/${P}-configure.patch
 	"${FILESDIR}"/${P}-tinfo.patch

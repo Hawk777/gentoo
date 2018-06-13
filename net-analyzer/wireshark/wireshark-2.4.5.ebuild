@@ -10,7 +10,7 @@ SRC_URI="${HOMEPAGE}download/src/all-versions/${P/_/}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0/${PV}"
-KEYWORDS="amd64 ~arm ~arm64 hppa ~ia64 ~ppc ~ppc64 x86 ~x86-fbsd"
+KEYWORDS="amd64 arm ~arm64 hppa ia64 ppc ppc64 x86 ~x86-fbsd"
 IUSE="
 	adns androiddump +capinfos +caps +captype ciscodump cpu_flags_x86_sse4_2
 	+dftest doc doc-pdf +dumpcap +editcap geoip gtk kerberos libssh libxml2 lua
@@ -52,10 +52,8 @@ CDEPEND="
 		dev-qt/qtmultimedia:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtwidgets:5
-		|| (
-			media-libs/speexdsp
-			<media-libs/speex-1.2.0
-		)
+		>=media-libs/speex-1.2.0
+		media-libs/speexdsp
 		x11-misc/xdg-utils
 	)
 	sbc? ( media-libs/sbc )

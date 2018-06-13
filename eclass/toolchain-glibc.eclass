@@ -363,11 +363,20 @@ setup_env() {
 		# and fall back on CFLAGS.
 		local VAR=CFLAGS_${CTARGET//[-.]/_}
 		CFLAGS=${!VAR-${CFLAGS}}
+		einfo " $(printf '%15s' 'Manual CFLAGS:')   ${CFLAGS}"
 	fi
 
 	setup_flags
 
 	export ABI=${ABI:-${DEFAULT_ABI:-default}}
+
+	if use headers-only ; then
+		# Avoid mixing host's CC and target's CFLAGS_${ABI}:
+		# At this bootstrap stage we have only binutils for
+		# target but not compiler yet.
+		einfo "Skip CC ABI injection. We can't use (cross-)compiler yet."
+		return 0
+	fi
 
 	local VAR=CFLAGS_${ABI}
 	# We need to export CFLAGS with abi information in them because glibc's
@@ -376,6 +385,7 @@ setup_env() {
 	# top of each other.
 	: ${__GLIBC_CC:=$(tc-getCC ${CTARGET_OPT:-${CTARGET}})}
 	export __GLIBC_CC CC="${__GLIBC_CC} ${!VAR}"
+	einfo " $(printf '%15s' 'Manual CC:')   ${CC}"
 }
 
 foreach_abi() {
@@ -657,16 +667,7 @@ toolchain-glibc_do_src_unpack() {
 	# Check NPTL support _before_ we unpack things to save some time
 	want_nptl && check_nptl_support
 
-	if [[ -n ${EGIT_REPO_URIS} ]] ; then
-		local i d
-		for ((i=0; i<${#EGIT_REPO_URIS[@]}; ++i)) ; do
-			EGIT_REPO_URI=${EGIT_REPO_URIS[$i]}
-			EGIT_SOURCEDIR=${EGIT_SOURCEDIRS[$i]}
-			git-2_src_unpack
-		done
-	else
-		unpack_pkg
-	fi
+	unpack_pkg
 
 	cd "${S}"
 	touch locale/C-translit.h #185476 #218003

@@ -8,12 +8,12 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1
 
 DESCRIPTION="Tool for transforming reStructuredText to PDF using ReportLab"
-HOMEPAGE="http://rst2pdf.ralsina.me/ https://pypi.python.org/pypi/rst2pdf"
+HOMEPAGE="http://rst2pdf.ralsina.me/ https://pypi.org/project/rst2pdf/"
 SRC_URI="https://github.com/rst2pdf/rst2pdf/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ppc ppc64 sparc x86"
+KEYWORDS="alpha amd64 arm ~arm64 hppa ppc ppc64 sparc x86"
 IUSE="svg"
 
 DEPEND="dev-python/docutils[${PYTHON_USEDEP}]

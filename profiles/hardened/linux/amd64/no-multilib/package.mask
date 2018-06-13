@@ -8,6 +8,7 @@ dev-lang/rebol-bin
 
 games-action/brutal-legend
 games-action/hotline-miami
+games-action/trine-enchanted-edition
 games-action/trine2
 games-action/swordandsworcery
 games-action/beathazardultra
@@ -25,7 +26,7 @@ app-accessibility/mbrola
 app-accessibility/perlbox-voice
 app-arch/stuffit
 app-benchmarks/cpuburn
-=app-editors/emacs-18*
+app-editors/emacs:18
 app-emulation/crossover-bin
 app-emulation/genymotion-bin
 app-emulation/playonlinux
@@ -36,9 +37,6 @@ app-emulation/winetricks
 app-text/acroread
 dev-embedded/libftd2xx
 dev-embedded/openocd
-dev-lang/icc
-dev-lang/idb
-dev-lang/ifc
 dev-perl/Archive-Rar
 dev-util/android-sdk-update-manager
 dev-util/android-studio
@@ -111,7 +109,6 @@ games-fps/ut2004-demo
 games-misc/little-inferno
 games-puzzle/hoh-bin
 games-roguelike/adom
-<games-roguelike/dwarf-fortress-0.43.0
 games-rpg/baldurs-gate-ee
 games-rpg/dear-esther
 games-rpg/eschalon-book-1-demo
@@ -140,7 +137,6 @@ net-print/cndrvcups-lb
 sci-biology/foldingathome
 sci-electronics/eagle
 sci-chemistry/cara-bin
-sci-chemistry/cyana
 sci-chemistry/mars
 sci-chemistry/xdsstat-bin
 sci-libs/ipp

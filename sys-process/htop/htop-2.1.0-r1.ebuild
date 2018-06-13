@@ -8,12 +8,12 @@ PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 inherit autotools linux-info python-single-r1
 
 DESCRIPTION="interactive process viewer"
-HOMEPAGE="http://hisham.hm/htop/"
-SRC_URI="http://hisham.hm/htop/releases/${PV}/${P}.tar.gz"
+HOMEPAGE="https://hisham.hm/htop/"
+SRC_URI="https://hisham.hm/htop/releases/${PV}/${P}.tar.gz"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-linux ~x64-macos"
 IUSE="kernel_FreeBSD kernel_linux openvz unicode vserver"
 
 RDEPEND="sys-libs/ncurses:0=[unicode?]"

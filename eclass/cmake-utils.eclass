@@ -109,11 +109,11 @@ case ${EAPI} in
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 
-inherit toolchain-funcs ninja-utils flag-o-matic multiprocessing versionator xdg-utils
+inherit toolchain-funcs ninja-utils flag-o-matic multiprocessing xdg-utils
 
 case ${EAPI} in
 	7) ;;
-	*) inherit eutils multilib ;;
+	*) inherit eapi7-ver eutils multilib ;;
 esac
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
@@ -512,7 +512,7 @@ cmake-utils_src_configure() {
 	# we need to add "<INCLUDES>"
 	local includes=
 	if [[ ${PN} == cmake ]] ; then
-		if $(version_is_at_least 3.4.0 $(get_version_component_range 1-3 ${PV})) ; then
+		if $(ver_test $(ver_cut 1-3 ${PV}) -ge 3.4.0) ; then
 			includes="<INCLUDES>"
 		fi
 	elif ROOT=/ has_version \>=dev-util/cmake-3.4.0_rc1 ; then
@@ -520,7 +520,8 @@ cmake-utils_src_configure() {
 	fi
 	cat > "${build_rules}" <<- _EOF_ || die
 		SET (CMAKE_ASM_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> <DEFINES> ${includes} ${CPPFLAGS} <FLAGS> -o <OBJECT> -c <SOURCE>" CACHE STRING "ASM compile command" FORCE)
-		SET (CMAKE_ASM-ATT_COMPILE_OBJECT "<CMAKE_ASM_COMPILER> <DEFINES> ${includes} ${CPPFLAGS} <FLAGS> -o <OBJECT> -c <SOURCE>" CACHE STRING "ASM compile command" FORCE)
+		SET (CMAKE_ASM-ATT_COMPILE_OBJECT "<CMAKE_ASM-ATT_COMPILER> <DEFINES> ${includes} ${CPPFLAGS} <FLAGS> -o <OBJECT> -c -x assembler <SOURCE>" CACHE STRING "ASM-ATT compile command" FORCE)
+		SET (CMAKE_ASM-ATT_LINK_FLAGS "-nostdlib" CACHE STRING "ASM-ATT link flags" FORCE)
 		SET (CMAKE_C_COMPILE_OBJECT "<CMAKE_C_COMPILER> <DEFINES> ${includes} ${CPPFLAGS} <FLAGS> -o <OBJECT> -c <SOURCE>" CACHE STRING "C compile command" FORCE)
 		SET (CMAKE_CXX_COMPILE_OBJECT "<CMAKE_CXX_COMPILER> <DEFINES> ${includes} ${CPPFLAGS} <FLAGS> -o <OBJECT> -c <SOURCE>" CACHE STRING "C++ compile command" FORCE)
 		SET (CMAKE_Fortran_COMPILE_OBJECT "<CMAKE_Fortran_COMPILER> <DEFINES> ${includes} ${FCFLAGS} <FLAGS> -o <OBJECT> -c <SOURCE>" CACHE STRING "Fortran compile command" FORCE)
@@ -613,6 +614,12 @@ cmake-utils_src_configure() {
 	_EOF_
 	[[ "${NOCOLOR}" = true || "${NOCOLOR}" = yes ]] && echo 'SET (CMAKE_COLOR_MAKEFILE OFF CACHE BOOL "pretty colors during make" FORCE)' >> "${common_config}"
 
+	if [[ ${EAPI} != [56] ]]; then
+		cat >> "${common_config}" <<- _EOF_ || die
+			SET (CMAKE_INSTALL_DOCDIR "${EPREFIX}/usr/share/doc/${PF}" CACHE PATH "")
+		_EOF_
+	fi
+
 	# Wipe the default optimization flags out of CMake
 	if [[ ${CMAKE_BUILD_TYPE} != Gentoo && ${EAPI} != 5 ]]; then
 		cat >> ${common_config} <<- _EOF_ || die
@@ -652,7 +659,7 @@ cmake-utils_src_configure() {
 	fi
 
 	# Common configure parameters (overridable)
-	# NOTE CMAKE_BUILD_TYPE can be only overriden via CMAKE_BUILD_TYPE eclass variable
+	# NOTE CMAKE_BUILD_TYPE can be only overridden via CMAKE_BUILD_TYPE eclass variable
 	# No -DCMAKE_BUILD_TYPE=xxx definitions will be in effect.
 	local cmakeargs=(
 		${warn_unused_cli}

@@ -12,7 +12,7 @@ inherit autotools cmake-utils eutils linux-info pax-utils python-single-r1
 LIBDVDCSS_VERSION="1.4.1-Leia-Alpha-1"
 LIBDVDREAD_VERSION="6.0.0-Leia-Alpha-1"
 LIBDVDNAV_VERSION="6.0.0-Leia-Alpha-1"
-FFMPEG_VERSION="3.4.1"
+FFMPEG_VERSION="4.0"
 CODENAME="Leia"
 FFMPEG_KODI_VERSION="Alpha-1"
 SRC_URI="https://github.com/xbmc/libdvdcss/archive/${LIBDVDCSS_VERSION}.tar.gz -> libdvdcss-${LIBDVDCSS_VERSION}.tar.gz
@@ -21,7 +21,7 @@ SRC_URI="https://github.com/xbmc/libdvdcss/archive/${LIBDVDCSS_VERSION}.tar.gz -
 	!system-ffmpeg? ( https://github.com/xbmc/FFmpeg/archive/${FFMPEG_VERSION}-${CODENAME}-${FFMPEG_KODI_VERSION}.tar.gz -> ffmpeg-${PN}-${FFMPEG_VERSION}-${CODENAME}-${FFMPEG_KODI_VERSION}.tar.gz )"
 
 DESCRIPTION="Kodi is a free and open source media-player and entertainment hub"
-HOMEPAGE="https://kodi.tv/ http://kodi.wiki/"
+HOMEPAGE="https://kodi.tv/ https://kodi.wiki/"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -71,10 +71,14 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/libass-0.13.4
 	media-libs/mesa[egl]
 	>=media-libs/taglib-1.11.1
-	system-ffmpeg? ( >=media-video/ffmpeg-${FFMPEG_VERSION}:=[encode,openssl,postproc] )
+	system-ffmpeg? (
+		>=media-video/ffmpeg-${FFMPEG_VERSION}:=[encode,postproc]
+		libressl? ( media-video/ffmpeg[libressl,-openssl] )
+		!libressl? ( media-video/ffmpeg[-libressl,openssl] )
+	)
 	mysql? ( virtual/mysql )
 	>=net-misc/curl-7.56.1
-	nfs? ( net-fs/libnfs:= )
+	nfs? ( >=net-fs/libnfs-2.0.0:= )
 	opengl? ( media-libs/glu )
 	!libressl? ( >=dev-libs/openssl-1.0.2l:0= )
 	libressl? ( dev-libs/libressl:0= )
@@ -97,7 +101,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		system-ffmpeg? ( media-video/ffmpeg[vdpau] )
 	)
 	wayland? (
-		>=dev-cpp/waylandpp-0.2.2:=
+		>=dev-cpp/waylandpp-0.2.3:=
 		media-libs/mesa[wayland]
 		>=dev-libs/wayland-protocols-1.7
 		>=x11-libs/libxkbcommon-0.4.1
@@ -118,7 +122,7 @@ RDEPEND="${COMMON_DEPEND}
 		|| ( app-misc/lirc app-misc/inputlircd )
 	)
 	!media-tv/xbmc
-	udisks? ( sys-fs/udisks:0 )
+	udisks? ( sys-fs/udisks:2 )
 	upower? (
 		systemd? ( sys-power/upower )
 		!systemd? (
@@ -231,13 +235,12 @@ src_configure() {
 		-DENABLE_INTERNAL_FFMPEG="$(usex !system-ffmpeg)"
 		-DENABLE_CAP=$(usex caps)
 		-DENABLE_LCMS2=$(usex lcms)
-		-DENABLE_LIRC=$(usex lirc)
+		-DENABLE_LIRCCLIENT=$(usex lirc)
 		-DENABLE_MICROHTTPD=$(usex webserver)
 		-DENABLE_MYSQLCLIENT=$(usex mysql)
 		-DENABLE_NFS=$(usex nfs)
 		-DENABLE_OPENGLES=$(usex gles)
 		-DENABLE_OPENGL=$(usex opengl)
-		-DENABLE_OPENSSL=ON
 		-DENABLE_OPTICAL=$(usex dvd)
 		-DENABLE_PLIST=$(usex airplay)
 		-DENABLE_PULSEAUDIO=$(usex pulseaudio)
@@ -304,5 +307,5 @@ src_install() {
 		usr/share/kodi/addons/skin.estuary/fonts/Roboto-Thin.ttf
 
 	python_domodule tools/EventClients/lib/python/xbmcclient.py
-	python_newscript "tools/EventClients/Clients/Kodi Send/kodi-send.py" kodi-send
+	python_newscript "tools/EventClients/Clients/KodiSend/kodi-send.py" kodi-send
 }

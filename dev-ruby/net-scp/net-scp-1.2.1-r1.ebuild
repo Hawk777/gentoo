@@ -3,7 +3,7 @@
 
 EAPI=5
 
-USE_RUBY="ruby22 ruby23 ruby24"
+USE_RUBY="ruby23 ruby24 ruby25"
 
 RUBY_FAKEGEM_EXTRADOC="CHANGES.txt README.rdoc"
 
@@ -16,7 +16,7 @@ HOMEPAGE="https://github.com/net-ssh/net-scp"
 
 LICENSE="GPL-2"
 SLOT="2"
-KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE=""
 
 RUBY_PATCHES=(

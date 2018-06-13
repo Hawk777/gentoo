@@ -1,6 +1,30 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+# Luke Dashjr <luke-jr+gentoobugs@utopios.org> (08 Jun 2018)
+# Requires unported sys-libs/netbsd-csu
+sys-devel/clang-runtime crt
+
+# Luke Dashjr <luke-jr+gentoobugs@utopios.org> (08 Jun 2018)
+# sys-devel/llvmgold not yet keyworded
+sys-devel/llvm gold
+
+# Tomáš Mózes <hydrapolic@gmail.com> (05 Jun 2018)
+# Unkeyworded dependencies.
+app-admin/syslog-ng mongodb
+
+# Andreas Sturmlechner <asturm@gentoo.org> (18 May 2018)
+# media-libs/libaom not yet keyworded
+media-video/vlc aom
+
+# Anthony G. Basile <blueness@gentoo.org> (14 Apr 2018)
+# net-vpn/tor, tests are broken on ppc/ppc64, bug #653098
+net-vpn/tor test
+
+# Sergei Trofimovich <slyfox@gentoo.org> (27 Mar 2018)
+# dev-qt/qtwebengine is not ported to powerpc
+www-client/otter webengine
+
 # Matthias Maier <tamiko@gentoo.org> (18 Mar 2018)
 # dev-libs/capstone not keyworded
 app-emulation/qemu capstone
@@ -8,10 +32,6 @@ app-emulation/qemu capstone
 # Andreas Sturmlechner <asturm@gentoo.org> (02 Mar 2018)
 # Requires unkeyworded deps
 >=dev-python/ipython-5.4.1 qt5 smp
-
-# NP-Hardass <NP-Hardass@gentoo.org> (01 Mar 2018)
-# net-libs/libmicrodns not yet keyworded for ppc
-media-video/vlc microdns
 
 # Amy Liffey <amynka@gentoo.org (21 Jan 2018)
 # dev-libs/cereal not keyworded for ppc
@@ -103,17 +123,9 @@ sys-auth/polkit kde
 sys-block/gparted kde
 virtual/notification-daemon kde
 
-# Davide Pesavento <pesa@gentoo.org> (06 Jun 2016)
-# Requires unkeyworded dev-python/PyQt5
-net-print/hplip qt5
-
 # Johannes Huber <johu@gentoo.org> (26 Mar 2016)
 # Unkeyworded dependency x11-libs/snorenotify
 net-irc/quassel snorenotify
-
-# Rick Farina <zerochaos@gentoo.org> (23 Mar 2016)
-# rspec:3 is not keyworded for x86 at this time
-=dev-ruby/bundler-audit-0.5.0 test
 
 # Justin Lecher <jlec@gentoo.org> (22 Feb 2016)
 # Missing test deps keyword #575366
@@ -199,15 +211,11 @@ dev-ruby/haml test
 
 # Anthony G. Basile <blueness@gentoo.org> (14 Aug 2014)
 # Mask these flags since mongodb is broken on ppc/ppc64
-dev-python/ipython doc matplotlib mongodb nbconvert notebook qt4 test
+dev-python/ipython doc matplotlib mongodb nbconvert notebook test
 
 # Anthony G. Basile <blueness@gentoo.org> (12 Aug 2014)
 # Ultimately pulls in nodejs which is broken.
 dev-ruby/actionpack test
-
-# Anthony G. Basile <blueness@gentoo.org> (12 Aug 2014)
-# Ultimately pulls in nodejs which is broken.
-dev-ruby/tilt test
 
 # Anthony G. Basile <blueness@gentoo.org> (12 Aug 2014)
 # Pulls in ceph which is broken.  Masked per dev-zero.

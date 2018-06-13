@@ -18,7 +18,7 @@ IUSE="${IUSE_SERVERS} debug +glamor ipv6 libressl minimal selinux systemd +udev 
 
 CDEPEND=">=app-eselect/eselect-opengl-1.3.0
 	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl )
+	libressl? ( dev-libs/libressl:0= )
 	>=x11-apps/iceauth-1.0.2
 	>=x11-apps/rgb-1.0.3
 	>=x11-apps/xauth-1.0.3
@@ -69,7 +69,7 @@ CDEPEND=">=app-eselect/eselect-opengl-1.3.0
 		>=x11-libs/libXext-1.0.5
 		>=media-libs/mesa-10.3.4-r1
 	)
-	udev? ( >=virtual/udev-150 )
+	udev? ( virtual/libudev:= )
 	unwind? ( sys-libs/libunwind )
 	wayland? (
 		>=dev-libs/wayland-1.3.0
@@ -161,8 +161,9 @@ src_configure() {
 		$(use_with doc xmlto)
 		$(use_with systemd systemd-daemon)
 		$(use_enable systemd systemd-logind)
+		$(use_enable systemd suid-wrapper)
+		$(use_enable !systemd install-setuid)
 		--enable-libdrm
-		--enable-suid-wrapper
 		--sysconfdir="${EPREFIX}"/etc/X11
 		--localstatedir="${EPREFIX}"/var
 		--with-fontrootdir="${EPREFIX}"/usr/share/fonts

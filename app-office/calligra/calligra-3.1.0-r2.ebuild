@@ -20,7 +20,7 @@ HOMEPAGE="https://www.calligra.org/"
 LICENSE="GPL-2"
 
 [[ ${KDE_BUILD_TYPE} == release ]] && \
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 x86"
 
 CAL_FTS=( karbon plan sheets words )
 
@@ -159,6 +159,8 @@ src_prepare() {
 		sed -e "/add_subdirectory(plan)/s/#//" \
 			-e "/^calligra_disable_product(APP_PLAN/s/^/#/" \
 			-i CMakeLists.txt || die
+
+		eapply "${FILESDIR}"/${P}-plan-qt-5.11.patch
 	fi
 	kde5_src_prepare
 

@@ -1,6 +1,10 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
+# Ulrich Müller <ulm@gentoo.org> (01 May 2018)
+# Missing keyword on virtual/gsasl dependency, bug #635216.
+net-mail/mailutils sasl
+
 # Michał Górny <mgorny@gentoo.org> (13 Mar 2018)
 # Missing keywords on dependencies.
 dev-qt/designer webkit
@@ -50,11 +54,10 @@ media-video/ffmpeg frei0r sofalizer
 # Michał Górny <mgorny@gentoo.org> (19 Feb 2018)
 # Unkeyworded dependencies.
 app-doc/doxygen clang
-dev-libs/libpeas jit
 dev-perl/GD fcgi
 media-libs/libcanberra gnome
 media-libs/mesa vaapi
-media-sound/pulseaudio equalizer qt4 realtime
+media-sound/pulseaudio equalizer qt4 qt5 realtime
 media-video/ffmpeg celt ebur128 kvazaar libilbc openh264
 media-video/ffmpeg rubberband sdl ssh x265 zeromq zimg
 net-libs/gnutls idn
@@ -93,6 +96,7 @@ sys-devel/llvm ocaml
 
 # Ulrich Müller <ulm@gentoo.org> (23 Oct 2017)
 # Needs net-mail/mailutils which is not keyworded, bug #635216.
+app-editors/emacs mailutils
 app-editors/emacs-vcs mailutils
 
 # Johannes Huber <johu@gentoo.org> (28 Jan 2015)

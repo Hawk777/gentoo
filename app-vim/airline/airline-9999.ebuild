@@ -1,7 +1,8 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
+
 inherit vim-plugin
 
 if [[ ${PV} != 9999* ]] ; then
@@ -21,6 +22,8 @@ LICENSE="MIT"
 VIM_PLUGIN_HELPFILES="${PN}.txt"
 
 src_prepare() {
+	default
+
 	# remove unwanted files
 	rm -r t Gemfile Rakefile LICENSE README* || die
 }

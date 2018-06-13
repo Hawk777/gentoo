@@ -10,7 +10,7 @@ inherit linux-info xorg-2 flag-o-matic
 if [[ ${PV} == 9999* ]]; then
 	SRC_URI=""
 else
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="amd64 x86"
 	COMMIT_ID="75795523003798d789d417e82aaa81c7ea1ed616"
 	SRC_URI="https://cgit.freedesktop.org/xorg/driver/xf86-video-intel/snapshot/${COMMIT_ID}.tar.xz -> ${P}.tar.xz"
 	S=${WORKDIR}/${COMMIT_ID}
@@ -57,10 +57,7 @@ RDEPEND="
 	)
 "
 DEPEND="${RDEPEND}
-	>=x11-proto/dri2proto-2.6
-	x11-proto/dri3proto
-	x11-proto/presentproto
-	x11-proto/resourceproto"
+	x11-base/xorg-proto"
 
 src_configure() {
 	replace-flags -Os -O2
